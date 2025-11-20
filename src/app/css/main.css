@@ -1,0 +1,1037 @@
+/* --- Base Layout Styles from your previous requests --- */
+
+.homeBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../branding/heroBg.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1; 
+}
+
+.overlay {
+  position: fixed; 
+  width: 100%; 
+  height: 100%; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2; 
+}
+
+.homepage-header {
+  width: 100%;
+  height: 5vw;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 501;
+}
+
+.header-logo-overlay {
+  background-color: white;
+  width: 5vw;
+  height: 5vw;
+  border-radius: 2vw/2vw;
+  margin-left: 4vw;
+  margin-top: 1.2%;
+  z-index: 502;
+}
+
+.header-logo {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/IwwLogo.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  margin-left: -1.9vw;
+  margin-top: 0.2vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.title-container {
+  width: 100%; /* Spans the full viewport */
+  position: relative;
+  /* Optional: Center the entire block vertically on the page */
+  display: flex;
+  justify-content: center;
+}
+
+.homepage-title {
+  color: white;
+  font-family: 'font-face';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15vw;
+  z-index: 40;
+  position: relative;
+  font-size: 5.0vw;
+  transition: all 0.5s ease-in-out;
+  
+  /* REQUIRED CHANGE for alignment with the wheel component */
+  display: flex; 
+  justify-content: center; /* Centers the entire line of content */
+  align-items: center;
+  /* Allow the text and wheel to wrap if the screen is too narrow */
+  flex-wrap: wrap; 
+}
+
+
+/* --- CSS for the 3D Scrolling Wheel Animation --- */
+
+/* 1. Define the viewport (the mask) for the scrolling wheel */
+.scrolling-wheel-mask {
+  /* Define the height of one "word slot." Must match the font size! */
+  --word-height: 5.3vw;  
+  height: var(--word-height); 
+  overflow: hidden; /* Hides words above and below the current slot */
+  
+  /* --- CRITICAL FIXES FOR CONSISTENT SPACING --- */
+  display: inline-flex; 
+  /* Use the JS-set variable for the total width (based on longest word) */
+  width: var(--max-word-width, 18vw); 
+  
+  /* FIX: Align the content to the left edge of the fixed-width mask. 
+     This prevents short words from being centered and adding a large gap. */
+  justify-content: flex-start; 
+  /* --- END CRITICAL FIXES --- */
+  
+  vertical-align: top; 
+  
+  /* Set up 3D perspective to make the words curve/rotate */
+  perspective: 500px; 
+  position: relative;
+  text-align: left; /* Keep text alignment for the scroll content */
+  
+  /* ADJUST: Use this margin to control the final space between static and dynamic text */
+  margin-left: 1vw; 
+}
+
+/* 2. The container that moves vertically */
+.word-scroller {
+  /* Set the vertical scroll position using the variable from JS */
+  /* This variable is set via the style attribute in the JS: style="--word-offset: -1;" */
+  transform: translateY(calc(var(--word-offset, 0) * var(--word-height)));
+  
+  /* Smooth transition for the vertical scroll */
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  transform-style: preserve-3d; /* Allows nested elements to use 3D transforms */
+}
+
+/* 3. Styling for each individual word (off-center state) */
+.wheel-word {
+  height: var(--word-height);
+  line-height: var(--word-height); 
+  opacity: 0.15; /* Faint visibility when not active */
+  transform-origin: center center;
+  position: relative;
+  
+  /* FIX: Align the word text to the LEFT within its slot */
+  text-align: left; 
+  
+  /* Prevents words from wrapping when measured for max width */
+  white-space: nowrap; 
+  
+  /* Apply a slight 3D transformation to simulate being on a wheel's curve */
+  transform: 
+      rotateX(calc(var(--word-offset, 0) * 15deg)) 
+      translateZ(calc(var(--word-height) * 0.5));
+  
+  /* Ensure all transition changes are smooth */
+  transition: all 0.5s ease-in-out; 
+}
+
+/* 4. Styling for the active (current) word */
+.wheel-word.active {
+  opacity: 1; 
+  font-weight: bold;
+  color: #ffcc00; /* Highly visible active color */
+  transform: none; /* Remove 3D transform for the word in the center slot */
+}
+
+.homepage-description {
+  color: white;
+  font-family: 'font-face';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 6vw;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  z-index: 40;
+  position: relative;
+  font-size: 2.0vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.learn-mora {
+  position: absolute;
+  padding: 0.8vw 2vw;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(225, 255, 255, 0.1);
+  backdrop-filter: blur(15px) saturate(90%);
+  -webkit-backdrop-filter: blur(15px) saturate(90%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+  left: 41.8vw;
+  top: 47vw;
+  border-radius: 15% / 55%;
+}
+
+.learn-mora:hover {
+  backdrop-filter: blur(20px) saturate(120%);
+}
+
+.learn-mora::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.learn-mora::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.learn-mora-text {
+  font-family: 'font-face';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: bold;
+  font-size: 2vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.intro {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 23vw; 
+  height: 20vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 20% / 26%;
+  visibility: visible;
+  margin: auto;
+  margin-top: 12vw;
+  left: 0vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  padding-top: 5.5vw;
+  display: block;
+}
+
+.intro:hover {
+  background-color: rgba(255, 255, 255, 0.438);
+  color: black;
+  transition: all 0.7s ease-in-out;
+}
+
+.claim1 {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 23vw; 
+  height: 20vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 20% / 26%;
+  visibility: visible;
+  margin: auto;
+  top: 5vw;
+  left: -30vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  padding-top: 3.5vw;
+  display: block;
+}
+
+.claim1:hover {
+  background-color: rgba(255, 255, 255, 0.438);
+  color: black;
+  transition: all 0.7s ease-in-out;
+}
+
+.claim2 {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 23vw; 
+  height: 20vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 20% / 26%;
+  visibility: visible;
+  margin: auto;
+  top: -15vw;
+  left: 0vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  padding-top: 5.5vw;
+  display: block;
+}
+
+.claim2:hover {
+  background-color: rgba(255, 255, 255, 0.438);
+  color: black;
+  transition: all 0.7s ease-in-out;
+}
+
+.claim3 {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 23vw; 
+  height: 20vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 20% / 26%;
+  visibility: visible;
+  margin: auto;
+  top: -35vw;
+  left: 30vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  padding-top: 3.5vw;
+  display: block;
+}
+
+.claim3:hover {
+  background-color: rgba(255, 255, 255, 0.438);
+  color: black;
+  transition: all 0.7s ease-in-out;
+}
+
+.conclusion {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 23vw; 
+  height: 20vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 20% / 26%;
+  visibility: visible;
+  margin: auto;
+  top: -30vw;
+  left: 0vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  padding-top: 5.5vw;
+  display: block;
+}
+
+.conclusion:hover {
+  background-color: rgba(255, 255, 255, 0.438);
+  color: black;
+  transition: all 0.7s ease-in-out;
+}
+
+.intro-title {
+  color: white;
+  font-family: 'font-face';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  z-index: 40;
+  position: relative;
+  font-size: 3.5vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.intro-description {
+  color: white;
+  font-family: 'font-face';
+  font-weight: normal;
+  text-align: left;
+  margin-top: 3vw;
+  margin-left: 4vw;
+  margin-right: 40vw;
+  z-index: 40;
+  position: relative;
+  font-size: 1.8vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.poster-intro {
+  position: absolute;
+  width: 30vw;
+  height: 44vw;
+  background-image: url('../../branding/bigUnionDecl.jpg');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-left: 63vw;
+  margin-top: -40vw;
+  transition: all 0.3s ease-in-out;
+  border-radius: 5vw;
+}
+
+.intro-next {
+  position: absolute;
+  padding: 0.8vw 2vw;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(225, 255, 255, 0.1);
+  backdrop-filter: blur(15px) saturate(90%);
+  -webkit-backdrop-filter: blur(15px) saturate(90%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+  left: 15vw;
+  top: 58vw;
+  border-radius: 9% / 60%;
+}
+
+.intro-next::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.intro-next::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.intro-next:hover {
+  backdrop-filter: blur(20px) saturate(120%);
+}
+
+.intro-btn-text {
+  font-family: 'font-face';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: bold;
+  font-size: 2vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.intro-poster-description {
+  color: white;
+  font-family: 'font-face';
+  font-weight: normal;
+  text-align: center;
+  margin-top: 4.2vw;
+  margin-left: 65vw;
+  margin-right: 9vw;
+  z-index: 40;
+  position: relative;
+  font-size: 1.3vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.claim1-title {
+  color: white;
+  font-family: 'font-face';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  z-index: 40;
+  position: relative;
+  font-size: 3vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.claim1-panga {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 85vw; 
+  height: 18vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 6% / 26%;
+  visibility: visible;
+  margin: auto;
+  margin-top: 12vw;
+  left: 0vw;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  padding-top: 2.5vw;
+  padding-left: 6vw;
+  display: block;
+}
+
+.claim1-strike {
+  width: 1vw; 
+  height: 14vw;
+  top: 2vw;
+  left: 3vw;
+  background-color: white;
+  opacity: 50%;
+  position: absolute; 
+  display: block;
+  z-index: 506; 
+  border-radius: 100vw;
+}
+
+.claim1-to-ev1 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 5.5vw;
+}
+
+.claim1-ev1Panga {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 85vw; 
+  height: 22vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 7% / 24%;
+  visibility: visible;
+  margin: auto;
+  margin-top: 12vw;
+  left: 0vw;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  padding-top: 1.8vw;
+  padding-left: 6vw;
+  display: block;
+}
+
+.c1-ev1-strike {
+  width: 1vw; 
+  height: 18vw;
+  top: 2vw;
+  left: 3vw;
+  background-color: white;
+  opacity: 50%;
+  position: absolute; 
+  display: block;
+  z-index: 506; 
+  border-radius: 100vw;
+}
+
+.c1-ev1-title {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3.4vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  visibility: visible;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.c1-ev1-para {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  visibility: visible;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+}
+
+.claim1-analysis-title {
+  color: white;
+  font-family: 'font-face';
+  font-weight: Bold;
+  text-align: left;
+  margin-top: 7vw;
+  margin-left: 4vw;
+  margin-right: 40vw;
+  z-index: 40;
+  position: relative;
+  font-size: 4vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.claim1-analysis {
+  color: white;
+  font-family: 'font-face';
+  font-weight: normal;
+  text-align: left;
+  margin-top: 1vw;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  z-index: 40;
+  position: relative;
+  font-size: 2.5vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.c1-next {
+  position: absolute;
+  padding: 0.8vw 2vw;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(225, 255, 255, 0.1);
+  backdrop-filter: blur(15px) saturate(90%);
+  -webkit-backdrop-filter: blur(15px) saturate(90%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+  left: 31vw;
+  top: 276vw;
+  border-radius: 9% / 60%;
+}
+
+.c1-next::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.c1-next::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.c1-next:hover {
+  backdrop-filter: blur(20px) saturate(120%);
+}
+
+.c1-btn-text {
+  font-family: 'font-face';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: bold;
+  font-size: 2vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  display: block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.c1ev1-to-analysis {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 39vw;
+}
+
+.claim1-to-ev2 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 85vw;
+}
+
+.c1ev2-to-analysis {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 122vw;
+}
+
+.claim1-to-ev3 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 169vw;
+}
+
+.c1ev3-to-analysis {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 200vw;
+}
+
+.claim1-ev2Panga {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 85vw; 
+  height: 22vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 7% / 24%;
+  visibility: visible;
+  margin: auto;
+  margin-top: 16vw;
+  left: 0vw;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  padding-top: 1.8vw;
+  padding-left: 6vw;
+  display: block;
+}
+
+.c1-ev2-para {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2.9vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  visibility: visible;
+  margin: auto;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+}
+
+.spacing {
+  width: 5vw;
+  height: 5vw;
+  position: relative;
+  display: block;
+  margin-top: 10vw;
+}
+
+.c2ev3-to-analysis {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 115vw;
+}
+
+.arrow-oi {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 157vw;
+}
+
+.oioi2 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 193vw;
+}
+
+
+
+.claim3-ev3Panga {
+  font-family: 'font-face';
+  color: white;
+  font-weight: bold;
+  font-size: 3vw;
+  z-index: 505; 
+  position: relative; 
+  align-items: center;
+  width: 85vw; 
+  height: 15vw; 
+  backdrop-filter: blur(20px) saturate(40%);
+  -webkit-backdrop-filter: blur(20px) saturate(40%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.302);
+  border-radius: 4% / 22%;
+  visibility: visible;
+  margin: auto;
+  margin-top: 12vw;
+  left: 0vw;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  padding-top: 3vw;
+  padding-left: 6vw;
+  display: block;
+}
+
+.c3-ev3-strike {
+  width: 1vw; 
+  height: 11vw;
+  top: 2vw;
+  left: 3vw;
+  background-color: white;
+  opacity: 50%;
+  position: absolute; 
+  display: block;
+  z-index: 506; 
+  border-radius: 100vw;
+}
+
+.oioi3 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 86.5vw;
+}
+
+.oioi4 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 122vw;
+}
+
+.oioi5{
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 169vw;
+}
+
+.oioi6 {
+  position: absolute;
+  width: 9%;
+  height: 90%;
+  background-image: url('../../branding/arrowDown.png');
+  background-position: center;
+  z-index: 503;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s ease-in-out;
+  margin-left: 45%;
+  top: 197vw;
+}
+
+.spacing2 {
+  width: 5vw;
+  height: 5vw;
+  position: relative;
+  display: block;
+  margin-top: 18vw;
+}
+
+.conclusionTitle {
+  color: white;
+  font-family: 'font-face';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  z-index: 40;
+  position: relative;
+  font-size: 5vw;
+  transition: all 0.3s ease-in-out;
+}
+
+.conclusionText {
+  color: white;
+  font-family: 'font-face';
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  z-index: 40;
+  position: relative;
+  font-size: 3vw;
+  transition: all 0.3s ease-in-out;
+}
