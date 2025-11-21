@@ -1027,11 +1027,173 @@
   font-family: 'font-face';
   font-weight: bold;
   text-align: center;
-  margin-top: 5vw;
+  margin-top: 2vw;
   margin-left: 10vw;
   margin-right: 10vw;
   z-index: 40;
   position: relative;
   font-size: 3vw;
   transition: all 0.3s ease-in-out;
+}
+
+.bib-button {
+  position: absolute;
+  padding: 0.8vw 2vw;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: rgba(225, 255, 255, 0.1);
+  backdrop-filter: blur(15px) saturate(90%);
+  -webkit-backdrop-filter: blur(15px) saturate(90%);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease-in-out;
+  z-index: 20;
+  left: 42vw;
+  top: 50vw;
+  border-radius: 20% / 60%;
+}
+
+.bib-button::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  opacity: 0.5;
+  pointer-events: none;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.bib-button::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.bib-button:hover {
+  backdrop-filter: blur(20px) saturate(120%);
+}
+
+.bib-button-text {
+  font-family: 'font-face';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: bold;
+  font-size: 2vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.spacing3 {
+  width: 5vw;
+  height: 5vw;
+  position: relative;
+  display: block;
+  margin-top: 17vw;
+}
+
+.bib-content1 {
+  font-family: 'times-new-roman';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: normal;
+  font-size: 1.5vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  padding-left: 50px;
+  text-indent: -50px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 2vw;
+}
+
+.bib-content2 {
+  font-family: 'times-new-roman';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: normal;
+  font-size: 1.5vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  padding-left: 50px;
+  text-indent: -50px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 2vw;
+}
+
+.bib-content3 {
+  font-family: 'times-new-roman';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: normal;
+  font-size: 1.5vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  padding-left: 50px;
+  text-indent: -50px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 2vw;
+}
+
+.bib-content4 {
+  font-family: 'times-new-roman';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: normal;
+  font-size: 1.5vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  padding-left: 50px;
+  text-indent: -50px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 2vw;
+}
+
+.bib-content5 {
+  font-family: 'times-new-roman';
+  position: relative;
+  z-index: 12;
+  color: white;
+  font-weight: normal;
+  font-size: 1.5vw;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  padding-left: 50px;
+  text-indent: -50px;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 2vw;
+}
+
+.spacing-bib {
+  width: 5vw;
+  height: 5vw;
+  position: relative;
+  display: block;
+  margin-top: 1vw;
 }

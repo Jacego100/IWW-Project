@@ -28,6 +28,9 @@ export default function conclusion() {
         
         <div className="conclusionTitle">A Lasting Influence</div>
         <div className="conclusionText">Through the use of music, the IWW successfully made a union and pushed for social change. They created a community where everyone felt like they belonged, and the music related to all workers, not just a select few. IWW’s work inspired workers to protest, which left a cultural impact that is still seen today.</div>
+        <Link href="/bibliography" className="bib-button">
+          <div className="bib-button-text">Bibliography</div>
+        </Link>
         </div>
     );
 }

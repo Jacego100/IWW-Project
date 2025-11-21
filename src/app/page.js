@@ -139,7 +139,7 @@ export default function Home() {
             </div>
         </div>
         
-        <div className="homepage-description">The Industrial Workers of the World (IWW) built a powerful movement using music, not just pamphlets. Songwriters like Joe Hill created memorable labor ballads by putting new, relatable lyrics to well-known melodies. These songs united workers, inspired them to protest unfair conditions, and their cultural impact persists to this day.</div>
+        <div className="homepage-description">The IWW built a very strong movement with music, not just pamphlets. Composers such as Joe Hill wrote memorable labor ballads by setting new, relevant lyrics to familiar melodies. The songs drew together the workers, inspired them to rise up against unfavorable conditions, and left their cultural mark even to this day.</div>
       </div>
       <div className="learn-mora">
         <Link href="/explore" className="learn-mora-text">Learn More...</Link>
